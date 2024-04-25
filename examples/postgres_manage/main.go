@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/shoekstra/go-dbmanager"
+	"github.com/capetrei/go-dbmanager@recreate-postgres-db"
 )
 
 type config struct {
