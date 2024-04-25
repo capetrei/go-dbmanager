@@ -1,4 +1,4 @@
-module github.com/shoekstra/go-dbmanager
+module github.com/capetrei/go-dbmanager
 
 go 1.21.5
 
