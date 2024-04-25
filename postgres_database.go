@@ -71,6 +71,27 @@ func (m *postgresManager) createDatabase(database Database) error {
 	return nil
 }
 
+// dropDatabase deletes the database.
+func (m *postgresManager) dropDatabase(database Database) error {
+
+	if exists, err := m.databaseExists(database.Name); err != nil {
+		return err
+	} else if !exists {
+		log.Printf("Database %s doesn't exist, skipping\n", database.Name)
+		return nil
+	}
+
+	query := fmt.Sprintf("DROP DATABASE %s", database.Name)
+
+	if _, err := m.db.Exec(query); err != nil {
+		return err
+	}
+
+	log.Printf("Deleted database: %s\n", database.Name)
+
+	return nil
+}
+
 // databaseExists checks if the specified database exists.
 func (m *postgresManager) databaseExists(name string) (bool, error) {
 	var exists bool

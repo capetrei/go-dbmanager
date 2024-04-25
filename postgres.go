@@ -79,6 +79,11 @@ func (m *postgresManager) Manage(databases []Database, users []User) error {
 
 	// Create databases
 	for _, database := range databases {
+		if database.AdditionalFlags != nil && isInArray("recreate", database.AdditionalFlags) {
+			if err := m.dropDatabase(database); err != nil {
+				return err
+			}
+		}
 		if err := m.CreateDatabase(database); err != nil {
 			return err
 		}
@@ -92,4 +97,14 @@ func (m *postgresManager) Manage(databases []Database, users []User) error {
 	}
 
 	return nil
+}
+
+// Function to check if a string is in a array
+func isInArray(item string, arr []string) bool {
+	for _, s := range arr {
+		if s == item {
+			return true
+		}
+	}
+	return false
 }

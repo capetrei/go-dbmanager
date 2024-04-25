@@ -1,7 +1,16 @@
 {
     "databases": [
         {
-            "name": "testdb",
+            "name": "testdb1",
+            "owner": "testowner",
+            "default_privileges": [
+                { "role": "testowner", "schema": "public", "grant": ["ALL"], "on": "tables", "to": "testuser" },
+                { "role": "testowner", "schema": "public", "grant": ["USAGE", "SELECT"], "on": "SEQUENCES", "to": "testuser" }
+            ],
+            "additional_flags": ["recreate"]
+        },
+        {
+            "name": "testdb2",
             "owner": "testowner",
             "default_privileges": [
                 { "role": "testowner", "schema": "public", "grant": ["ALL"], "on": "tables", "to": "testuser" },
